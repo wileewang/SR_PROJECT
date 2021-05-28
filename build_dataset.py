@@ -60,10 +60,10 @@ for imageHRPath in imageHRPaths:
                                                      resample=PIL.Image.BICUBIC))
 
             # write the images
-            targetPath = os.path.sep.join([config.LABELS, "{}.png".format(total)])
+            #targetPath = os.path.sep.join([config.LABELS, "{}.png".format(total)])
             scaledPath = os.path.sep.join([config.IMAGES, "{}.png".format(total)])
 
-            cv2.imwrite(targetPath, target)
+            #cv2.imwrite(targetPath, target)
             cv2.imwrite(scaledPath, scaled)
 
             total += 1
@@ -71,20 +71,20 @@ for imageHRPath in imageHRPaths:
                 print("[info] generated {total} images already...".format(total=total))
 
 
-
-print("[INFO] building HDF5 datasets...")
-inputPaths = sorted(list(paths.list_images(config.IMAGES)))
-outputPaths = sorted(list(paths.list_images(config.LABELS)))
-
-inputWriter = HDF5DatasetWriter((len(inputPaths), config.INPUT_DIM, config.INPUT_DIM, 3), config.INPUTS_DB)
-outputWriter = HDF5DatasetWriter((len(outputPaths), config.OUTPUT_DIM, config.OUTPUT_DIM, 3), config.OUTPUTS_DB)
-
-for (inputPath, outputPath) in zip(inputPaths, outputPaths):
-    inputImage = cv2.imread(inputPath)
-    outputImage = cv2.imread(outputPath)
-
-    inputWriter.add([inputImage], [-1])
-    outputWriter.add([outputImage], [-1])
-
-inputWriter.close()
-outputWriter.close()
+#
+# print("[INFO] building HDF5 datasets...")
+# inputPaths = sorted(list(paths.list_images(config.IMAGES)))
+# outputPaths = sorted(list(paths.list_images(config.LABELS)))
+#
+# inputWriter = HDF5DatasetWriter((len(inputPaths), config.INPUT_DIM, config.INPUT_DIM, 3), config.INPUTS_DB)
+# outputWriter = HDF5DatasetWriter((len(outputPaths), config.OUTPUT_DIM, config.OUTPUT_DIM, 3), config.OUTPUTS_DB)
+#
+# for (inputPath, outputPath) in zip(inputPaths, outputPaths):
+#     inputImage = cv2.imread(inputPath)
+#     outputImage = cv2.imread(outputPath)
+#
+#     inputWriter.add([inputImage], [-1])
+#     outputWriter.add([outputImage], [-1])
+#
+# inputWriter.close()
+# outputWriter.close()

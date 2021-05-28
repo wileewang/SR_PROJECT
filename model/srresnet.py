@@ -6,7 +6,7 @@ from tensorflow.keras import backend as K
 from tensorflow.keras.applications import VGG19
 from tensorflow.keras.layers import Input, add
 from tensorflow.keras.models import Model
-from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.optimizers import Adam, SGD
 import config.srresnet_config as config
 
 class SRResNet:
@@ -18,7 +18,7 @@ class SRResNet:
         self.LR_shape = config.LR_SHAPE
 
         # optimizer
-        optimizer = Adam(0.00002, 0.5)
+        optimizer = Adam(0.0002, 0.5)
 
         self.SRResNet = self.build()
         self.SRResNet.compile(loss='mse', optimizer=optimizer, metrics=['accuracy'])
